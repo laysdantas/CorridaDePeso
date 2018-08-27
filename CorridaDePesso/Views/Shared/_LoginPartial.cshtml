@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity
+@using CorridaDePesso.Models
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @if (Session["Usuario"] != null && ((ApplicationUser)Session["Usuario"]).TipoUsuario == TipoConta.Corredor)
+            {
+               @Html.ActionLink(" Seu Perfil", "Perfil", "Corredor")
+            }
+            else
+            {
+                @Html.ActionLink("Alterar Senha", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            }
+                                                                    
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        <li>@Html.ActionLink("Nova corrida", "Create", "Corrida")</li>
+        <li>@Html.ActionLink("Corridas em andamento", "CorridasPublicas", "Corrida")</li>
+        <li>@Html.ActionLink("Entrar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

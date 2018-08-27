@@ -1,0 +1,79 @@
+﻿@using CorridaDePesso.Models;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Corrida de Peso</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index","Corrida")">
+                    <img src="~/Img/logo.png" alt="Alternate Text" />
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Session["Usuario"] != null && ((ApplicationUser)Session["Usuario"]).TipoUsuario == TipoConta.Administrador)
+                    {
+                        <li>@Html.ActionLink("Corredores", "Index", "Corredor")</li>
+                    }
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Minhas Corridas", "MinhasCorridas", "Corrida")</li>
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    @RenderSection("banner", required: false)
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer id="page-footer" class="row">
+        <div class="container">
+            <div class="col-md-4">
+                <h3>
+                    </span>CONTATOS
+                </h3>
+                <hr>
+                <p>
+                    corridadepeso@gmail.com
+                    <br>+55 84 99946-6353
+                </p>
+            </div>
+            <div class="col-md-8">
+                <h3>
+                    </span>REDES SOCIAIS
+                </h3>
+                <hr>
+                <div class="fb-like"></div>
+            </div>
+        </div>
+    </footer>
+    <div id="fb-root"></div>
+    @*<script>
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.4&appId=701920979832721";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+    </script>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

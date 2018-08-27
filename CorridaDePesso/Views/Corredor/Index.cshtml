@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CorridaDePesso.Models.ViewModel.CorredorViewModel>
+@using CorridaDePesso.Models.ViewModel;
+
+@{
+    ViewBag.Title = "Lista de Corredores";
+}
+
+<h2>Lista de Corredores</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TituloCorrida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PesoIcinial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PesoAtual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PesoPerdido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PesoObjetivo)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.TituloCorrida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PesoIcinial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PesoAtual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PesoPerdido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PesoObjetivo)
+        </td>
+        <td>
+           @if (item.Aprovado)
+           {
+             @Html.ActionLink("Rejeitar", "Regeitar", new { id = item.Id }) 
+   
+           }
+            else
+           {
+             @Html.ActionLink("Aprovar", "Aprovar", new { id = item.Id }) 
+           }
+        </td>
+    </tr>
+}
+
+</table>

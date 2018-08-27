@@ -1,0 +1,64 @@
+﻿@model CorridaDePesso.Models.ViewModel.CorredorViewModel
+
+@{
+    ViewBag.Title = "Novo Corredor";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Novo Corredor</h4>
+        <hr />
+        @Html.HiddenFor(model => model.CorridaId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control numero2Decimais" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.urlImagemCorredor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.urlImagemCorredor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.urlImagemCorredor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoAcompanhamento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.TipoAcompanhamento, new { @class = "form-control chosen-select-deselect" })
+                <p>@Html.ValidationMessageFor(model => model.TipoAcompanhamento)</p>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Participar Agora!" class="btn btn-success" />
+        </div>
+    </div>
+    }
+<br>
+<div>
+ .
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/mascara")
+}
